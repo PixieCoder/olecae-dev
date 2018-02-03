@@ -1,0 +1,14 @@
+{
+  "latest": {
+    "default": {
+      "self": {
+        "service": {
+          "metadata": {
+            "root": "/app/dist",
+            "index": "index.html"
+          }
+        }
+      }
+    }
+  }
+}

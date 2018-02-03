@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+    web:
+        environment:
+            VIRTUAL_HOST: olecae.docker
+            VIRTUAL_PORT: 8080
+            USE_DNSMASQ: 1
+        volumes:
+          - ./docker-config/usr-local-etc:/usr/local/etc
+
+    #web-conf:
+        #volumes:
+            #- ./docker-config/answers.json:/answers.json
+
+    olecae-backend:
+        environment:
+            PHP_ENV: development
+
+    olecae-frontend:
+        environment:
+            NODE_ENV: development
+

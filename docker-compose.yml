@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+    web:
+        image: weahead/nginx:1.11.3
+        links:
+            - olecae-backend:olecae-backend
+        ports:
+            - "8080:8080"
+            - "2345:2345"
+        volumes_from:
+            - olecae-backend
+            - olecae-frontend
+            #- web-conf
+
+    #web-conf:
+        #image: weahead/nginx-conf:2.0.5
+
+    olecae-backend:
+        build: ./backend
+        image: filiphazardous/olecae-backend:dev
+        expose:
+            - "2345"
+        entrypoint: /app/entrypoint.sh
+        environment:
+            PHP_ENV: production
+        volumes:
+            - ./backend/app:/app
+
+    olecae-frontend:
+        build: ./frontend
+        image: filiphazardous/olecae-frontend:dev
+        environment:
+            NODE_ENV: production
+        volumes:
+            - ./frontend/app:/app
