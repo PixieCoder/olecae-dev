@@ -9,16 +9,16 @@ services:
             - "8080:8080"
             - "2345:2345"
         volumes_from:
-            - olecae-backend
             - olecae-frontend
             #- web-conf
-
+        depends_on:
+          - olecae-backend
     #web-conf:
         #image: weahead/nginx-conf:2.0.5
 
     olecae-backend:
         build: ./backend
-        image: filiphazardous/olecae-backend:dev
+        image: pixiecoder/olecae-backend:dev
         expose:
             - "2345"
         entrypoint: /app/entrypoint.sh
@@ -29,7 +29,7 @@ services:
 
     olecae-frontend:
         build: ./frontend
-        image: filiphazardous/olecae-frontend:dev
+        image: pixiecoder/olecae-frontend:dev
         environment:
             NODE_ENV: production
         volumes:
